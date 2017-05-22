@@ -18,8 +18,8 @@ public class MyImageIcon extends JFrame{
 	public MyImageIcon(){
 		Container container=getContentPane();
 		JLabel jl=new JLabel("这是一个JFrame窗体",JLabel.CENTER);
-		URL url=MyImageIcon.class.getResource("imageButton.jpg");
-		Icon icon=new ImageIcon(url);
+		//URL url=MyImageIcon.class.getResource("D:/a.jpg");
+		Icon icon=new ImageIcon("F:/test/a.jpg");
 		jl.setIcon(icon);
 		jl.setHorizontalAlignment(SwingConstants.CENTER);
 		jl.setOpaque(true);
