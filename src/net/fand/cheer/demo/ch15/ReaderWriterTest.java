@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -35,6 +36,12 @@ class TextEditorFrame extends JFrame {
 		JButton readButton = new JButton("read");
 		JButton writeButton = new JButton("write");
 
+		JPanel southPanel = new JPanel();
+		southPanel.setLayout(new GridLayout(1, 2));
+		southPanel.add(readButton);
+		southPanel.add(writeButton);
+		add(southPanel, BorderLayout.SOUTH);
+		
 		readButton.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
@@ -69,13 +76,29 @@ class TextEditorFrame extends JFrame {
 		writeButton.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-
+				FileWriter writer=null;
+				try {
+					writer=new FileWriter(editorFile);
+					String text=content.getText();
+					writer.write(text+"\n");
+					writer.flush();
+				} catch (Exception e2) {
+					// TODO: handle exception
+				}finally {
+					try {
+						if(writer!=null){
+							writer.close();
+						}
+					} catch (Exception e3) {
+						// TODO: handle exception
+					}
+				}
 			}
 		});
-		JPanel southPanel = new JPanel();
+		/*JPanel southPanel = new JPanel();
 		southPanel.setLayout(new GridLayout(1, 2));
 		southPanel.add(readButton);
 		southPanel.add(writeButton);
-		add(southPanel, BorderLayout.SOUTH);
+		add(southPanel, BorderLayout.SOUTH);*/
 	}
 }
