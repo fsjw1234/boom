@@ -8,32 +8,35 @@ import net.fand.cheer.taishan.TaiShan;
 import net.fand.cheer.taishan.define.Request;
 import net.fand.cheer.taishan.entity.Student;
 
-public class AddRequest implements Request{
+public class AddRequest implements Request {
+
 	private Student fill;
-	
+
 	public Student getFill() {
 		return fill;
 	}
 
-
+	@Override
 	public boolean input() {
-		fill=new Student();
-		String[] fields=new String[]{"姓名","性别","出生日期","身高","体重"};
-		String [] reflectFields={"name","sex","birthday","height","weight"};
-		
-		for(int i=0;i<fields.length;i++){
-			System.out.println("请输入学生的"+fields[i]+":");
-			String value=TaiShan.scanner.nextLine();
-			try{
-				Field field=Student.class.getDeclaredField(reflectFields[i]);
+		// TODO 自动生成的方法存根
+		fill = new Student();
+		String[] fields = new String[] { "姓名", "性别", "出生日期", "身高", "体重" };
+		String[] reflectFields = { "name", "sex", "birthday", "height",
+				"weight" };
+
+		for (int i = 0; i < fields.length; i++) {
+			System.out.print("请输入学生的" + fields[i] + ":");
+			String value = TaiShan.scanner.nextLine();
+			try {
+				Field field = Student.class.getDeclaredField(reflectFields[i]);
 				field.setAccessible(true);
-				if("birthday".equals(reflectFields[i])){
-					try{
-						field.set(fill,Student.df.parse(value));
-					}catch(ParseException e){
+				if ("birthday".equals(reflectFields[i])) {
+					try {
+						field.set(fill, Student.df.parse(value));
+					} catch (ParseException e) {
 						e.printStackTrace();
 					}
-				}else{
+				} else {
 					field.set(fill, value);
 				}
 				field.setAccessible(false);
@@ -50,8 +53,10 @@ public class AddRequest implements Request{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}		
+		}
+
 		fill.setId(UUID.randomUUID().toString());
 		return true;
 	}
+
 }
